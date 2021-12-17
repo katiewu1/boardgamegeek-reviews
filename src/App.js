@@ -1,9 +1,25 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import HeaderNavbar from './components/HeaderNavbar'
+import HomePage from './pages/HomePage'
+import ListOfBoardGames from './pages/ListOfBoardGames'
+import BoardGameDetails from './pages/BoardGameDetails'
+// import Random from './pages/Random'
 
 export const App = () => {
   return (
-    <div>
-      Find me in src/app.js!
-    </div>
+    <BrowserRouter>
+      <HeaderNavbar />
+      <Routes>
+        {/* <Route path='/404' element={<NotFound />} /> */}
+        <Route path='/' element={<HomePage />} />
+        <Route path='boardgames' element={<ListOfBoardGames />} />
+        <Route path='boardgames/:id' element={<BoardGameDetails />} />
+        {/* <Route path='boardgames/random' element={<Random />} /> */}
+        {/* <Route path='recipes' element={<AllRecipes />} /> */}
+        {/* <Route path='recipes/:name' element={<RecipeDetails />} /> */}
+      </Routes>
+    </BrowserRouter>
   )
 }
