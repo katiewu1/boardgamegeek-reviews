@@ -13,7 +13,6 @@ const BoardGameDetails = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log('useParams, id: ', id)
     setLoading(true)
     if (id === 'random') {
       fetch('https://boardgames-katie.herokuapp.com/boardgames/random')
@@ -29,12 +28,8 @@ const BoardGameDetails = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            console.log('data.response: ', data.response)
-            console.log('data.success:', data.success)
             setgameBoardDetails(data.response)
           } else {
-            console.log('error data; ', data)
-            console.log('error message error: ', data.error)
             setErrorMessage(data.error)
             setIsEmpty(true)
           }

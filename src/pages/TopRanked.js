@@ -20,11 +20,9 @@ const ListOfBoardGames = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          // console.log('data.response: ', data.response)
           setList(data.response)
           setTotalPages(data.totalPages - 1)
         } else {
-          console.log('error message response: ', data.response)
           setErrorMessage(data.response)
           setIsEmpty(true)
         }

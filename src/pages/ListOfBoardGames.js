@@ -46,12 +46,9 @@ const ListOfBoardGames = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            // console.log('data.response: ', data.response)
-            console.log('data.success:', data.success)
             setList(data.response)
             setTotalPages(data.totalPages - 1)
           } else {
-            console.log('error message error: ', data.error)
             setErrorMessage(data.error)
             setIsEmpty(true)
           }
@@ -79,34 +76,6 @@ const ListOfBoardGames = () => {
   const handleNextPageChange = () => {
     setPage(page + 1)
   }
-
-  // const fetchYearReleased = (value) => {
-  //   console.log('value: ', value)
-  //   setLoading(true)
-  //   fetch(
-  //     `https://boardgames-katie.herokuapp.com/boardgames/year/${value}?page=${page}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.success) {
-  //         // console.log('data.response: ', data.response)
-  //         console.log('data.success:', data.success)
-  //         setList(data.response)
-  //       } else {
-  //         console.log('error message error: ', data.error)
-  //         setErrorMessage(data.error)
-  //         setIsEmpty(true)
-  //       }
-  //     })
-  //     .catch(() => setIsEmpty(true))
-  //     .finally(setLoading(false))
-  // }
-
-  // const onHandleChange = (e) => {
-  //   console.log('e target value: ', e.target.value)
-  //   // setSearchValue(e.target.value)
-  //   setYear(e.target.value)
-  // }
 
   return (
     <div className='list-of-boardgames'>
@@ -153,7 +122,6 @@ const ListOfBoardGames = () => {
           <section className='boardgame-cards-section'>
             {list.map((review) => (
               <BoardGameCard key={review._id} review={review} />
-              // <p>{review.name}</p>
             ))}
           </section>
           <div className='page-info-wrapper'>
