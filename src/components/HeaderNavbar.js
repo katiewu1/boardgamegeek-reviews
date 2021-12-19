@@ -10,9 +10,9 @@ const HeaderNavbar = () => {
       </header>
       <nav className='navbar'>
         <NavLink to='/'>Home</NavLink>
-        <NavLink to='/boardgames'>Board Games</NavLink> {/* explore? */}
+        <NavLink to='/boardgames'>All reviews</NavLink> {/* explore? */}
         <NavLink to='/boardgames/random'>Random</NavLink>
-        {/* <NavLink to='/recipes'>See all recipes</NavLink> */}
+        <NavLink to='/ranked'>Top-ranking</NavLink>
       </nav>
     </>
   )

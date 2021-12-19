@@ -25,6 +25,7 @@ const HomePage = () => {
             boardgamegeek-reviews
           </a>
         </div>
+        <p>by Katie Wu 2021</p>
       </div>
     </>
   )

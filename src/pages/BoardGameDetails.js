@@ -1,44 +1,62 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import LoadingIndicator from '../components/LoadingIndicator'
 
 const BoardGameDetails = () => {
   const [gameBoardDetails, setgameBoardDetails] = useState([])
   const [loading, setLoading] = useState(false)
-  //   const [randomizing, setRandomizing] = useState(false)
+  const [isEmpty, setIsEmpty] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const { id } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
+    console.log('useParams, id: ', id)
     setLoading(true)
     if (id === 'random') {
       fetch('https://boardgames-katie.herokuapp.com/boardgames/random')
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.response)
-          setgameBoardDetails(data.response)
+          // convert Object Array to Object
+          console.log(Object.assign({}, ...data.response))
+          setgameBoardDetails(Object.assign({}, ...data.response))
         })
         .finally(setLoading(false))
     } else {
       fetch(`https://boardgames-katie.herokuapp.com/boardgames/${id}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log('data.response: ', data.response)
-          // console.log('bayesAverage type: ', typeof data.response.bayesAverage)
-          // console.log(
-          //   'data.response.bayesAverage.toFixed(2)',
-          //   data.response.bayesAverage.toFixed(2)
-          // )
-          setgameBoardDetails(data.response)
+          if (data.success) {
+            console.log('data.response: ', data.response)
+            console.log('data.success:', data.success)
+            setgameBoardDetails(data.response)
+          } else {
+            console.log('error data; ', data)
+            console.log('error message error: ', data.error)
+            setErrorMessage(data.error)
+            setIsEmpty(true)
+          }
+        })
+        .catch((err) => {
+          setIsEmpty(true)
+          setErrorMessage(err.error)
         })
         .finally(setLoading(false))
     }
   }, [id])
 
+  useEffect(() => {
+    if (isEmpty) {
+      // if there is no reviews found, navigate to page 404 and display the response message
+      // pass data with state when navigating
+      navigate('/404', { state: { message: errorMessage } })
+    }
+  }, [isEmpty, navigate, errorMessage])
+
   return (
     <div>
-      <p>Board game details!</p>
       {loading ? (
         <LoadingIndicator />
       ) : (
@@ -47,7 +65,6 @@ const BoardGameDetails = () => {
             <p className='card-title'>{gameBoardDetails.name}</p>
             <div className='card-info'>
               <div>
-                <p>{gameBoardDetails.name}</p>
                 <p>Release year: {gameBoardDetails.year}</p>
                 <p>Rank: {gameBoardDetails.rank}</p>
                 <p>Average: {gameBoardDetails.average}</p>

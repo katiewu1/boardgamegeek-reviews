@@ -24,13 +24,52 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
 .homepage-links-container {
   display: flex;
   flex-direction: column;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.search-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px auto 10px auto;
+}
+.search-input button {
+  margin-left: 10px;
+}
+
+.page-info-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.page-info-wrapper p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.page-button-container button {
+  margin: 0 10px;
 }
 
 .boardgame-cards-section {
@@ -52,7 +91,7 @@ header {
 
 .single-boardgame-card {
   width: 80%;
-  margin: 0 auto;
+  margin: 32px auto;
   border-radius: 8px;
   box-shadow: 5px 5px 8px #aaaaaa;
 }
@@ -100,6 +139,19 @@ header {
   margin-bottom: 10px;
 }
 
-.loading-indicator {
-  border: 2px solid red;
+a,
+a:visited {
+  color: #b24080;
+}
+
+a.active {
+  color: #ffa36c;
+}
+
+.lottie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
